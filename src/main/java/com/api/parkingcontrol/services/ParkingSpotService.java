@@ -2,12 +2,12 @@ package com.api.parkingcontrol.services;
 
 import com.api.parkingcontrol.models.ParkingSpotModel;
 import com.api.parkingcontrol.repositories.ParkingSpotRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ParkingSpotService {
@@ -36,5 +36,14 @@ public class ParkingSpotService {
 
     public List<ParkingSpotModel> getAll() {
         return parkingSpotRepository.findAll();
+    }
+
+    public Optional<ParkingSpotModel> findById(UUID id)  {
+        return parkingSpotRepository.findById(id);
+    }
+
+    @Transactional
+    public void delete(ParkingSpotModel parkingSpotModel) {
+        parkingSpotRepository.delete(parkingSpotModel);
     }
 }
